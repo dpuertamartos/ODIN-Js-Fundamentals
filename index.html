@@ -5,15 +5,13 @@
 </head>
 <body>
   <script>
-        const reverseString = function(str) {
-            let reversedString =""
-            for (let i=str.length-1; i>-1; i=i-1){
-                reversedString = reversedString + str[i]
+        const removeFromArray = function(array, elementToRemove) {
+            for(let i = 1; i<arguments.length; i++){
+                array = array.filter(element => element !== arguments[i])
             }
-            console.log(reversedString)
-            return reversedString
+            return array
         };
-        reverseString("hola")
+        console.log(removeFromArray([1,2,3,4],3,2,1))
   </script>
 </body>
 </html>
