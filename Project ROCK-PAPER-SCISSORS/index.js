@@ -10,12 +10,10 @@ const calculateWin = number => {
 
 const computerPlay = () => {
     const randomIndex = Math.floor(Math.random() * computerSelector.length)
-    console.log("computer plays", computerSelector[randomIndex])
     return computerSelector[randomIndex].toLowerCase()
 }
 
 const playRound = (playerSelection, computerSelection) => {
-    console.log("player plays", playerSelection)
     switch (playerSelection) {
         case "rock":
             switch (computerSelection) {
@@ -47,7 +45,65 @@ const playRound = (playerSelection, computerSelection) => {
     }
 }
 
-const playGame = () => {
+let score = 0
+let roundCount = 0
+const rockButton = document.querySelector("#ROCK")
+const paperButton = document.querySelector("#PAPER")
+const scissorsButton = document.querySelector("#SCISSORS")
+const results = document.querySelector("#RESULTS")
+const scoreDiv = document.querySelector("#SCORE")
+const gameEndDiv = document.querySelector("#GAMEEND")
+
+rockButton.addEventListener("click", () => {
+    const round = playRound("rock", computerPlay())
+    results.textContent = round
+    if (round[0].toLowerCase() === "w"){score++}
+    else if (round[0].toLowerCase() === "d"){score=score+0.5}
+    roundCount++
+    scoreDiv.textContent = `score ${score}/${roundCount}`
+    if(roundCount >4){
+        gameEndDiv.textContent = `Game finished, score ${score}/${roundCount}, you ${calculateWin(score)} the 5-round game. Click button again to keep playing `
+        score = 0
+        roundCount = 0
+    }
+    else{gameEndDiv.textContent = ""}
+
+})
+
+paperButton.addEventListener("click", () => {
+    const round = playRound("paper", computerPlay())
+    results.textContent = round
+    if (round[0].toLowerCase() === "w"){score++}
+    else if (round[0].toLowerCase() === "d"){score=score+0.5}
+    roundCount++
+    scoreDiv.textContent = `score ${score}/${roundCount}`
+    if(roundCount >4){
+        gameEndDiv.textContent = `Game finished, score ${score}/${roundCount}, you ${calculateWin(score)} the 5-round game. Click button again to keep playing`
+        score = 0
+        roundCount = 0
+    }
+    else{gameEndDiv.textContent = ""}
+
+})
+
+scissorsButton.addEventListener("click", () => {
+    const round = playRound("scissor", computerPlay())
+    results.textContent = round
+    if (round[0].toLowerCase() === "w"){score++}
+    else if (round[0].toLowerCase() === "d"){score=score+0.5}
+    roundCount++
+    scoreDiv.textContent = `score ${score}/${roundCount}`
+    if(roundCount >4){
+        gameEndDiv.textContent = `Game finished, score ${score}/${roundCount}, you ${calculateWin(score)} the 5-round game. Click button again to keep playing `
+        score = 0
+        roundCount = 0
+    }
+    else{gameEndDiv.textContent = ""}
+})
+
+
+
+/* const playGame = () => {
     let count = 0
     let drawCount = 0
     for (let i = 0; i < 5; i++){
@@ -59,8 +115,8 @@ const playGame = () => {
     }
     const score = count + drawCount * 0.5
     console.log(`Your score is ${score}/5. You ${calculateWin(score)}`)
-}
+} */
 
 
-playGame()
+
 
